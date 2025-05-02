@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src {{cspSource}} 'unsafe-inline'; img-src {{cspSource}} https:; script-src 'nonce-{{nonce}}' https://unpkg.com;">
+    <title>Function Call Graph</title>
+    <link href="graph.css" rel="stylesheet">
+    <script nonce="{{nonce}}" src="https://unpkg.com/cytoscape/dist/cytoscape.min.js"></script>
+</head>
+<body>
+    <div id="cy"></div>
+    <script nonce="{{nonce}}" src="graph.js"></script>
+</body>
+</html>
+

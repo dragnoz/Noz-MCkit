@@ -1,0 +1,113 @@
+{
+  "name": "minecraft-resource-toolkit",
+  "displayName": "Minecraft Resource Toolkit",
+  "description": "Tooling for Bedrock content creation: identifiers, glyphs, and dialogue/lang viewing.",
+  "version": "0.2.1",
+  "publisher": "manus-ai-dev",
+  "icon": "media/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/placeholder/repo.git"
+  },
+  "engines": { "vscode": "^1.70.0" },
+  "categories": ["Programming Languages", "Other"],
+  "activationEvents": [
+    "onLanguage:json",
+    "onLanguage:mcfunction",
+    "onLanguage:lang",
+    "workspaceContains:**/*.json",
+    "workspaceContains:**/*.mcfunction",
+    "workspaceContains:**/*.lang"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "mrt.selectLanguage",
+        "title": "MRT: Select Language for Dialogue View"
+      },
+      {
+        "command": "mrt.createNewLanguage",
+        "title": "MRT: Create New Language File for Dialogue"
+      }
+    ],
+    "viewsContainers": {
+      "explorer": [
+        {
+          "id": "mrt-linked-files",
+          "title": "Minecraft Linked Files",
+         "icon": "media/icon.png"
+        }
+      ]
+    },
+    "views": {
+      "explorer": [
+        {
+          "id": "mrtLinkedFilesView",
+          "name": "Linked Files"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Minecraft Resource Toolkit",
+      "properties": {
+
+        "mrt.glyphs.tileSize": {
+          "type": "integer",
+          "default": 16,
+          "description": "Size (width and height) of a single glyph tile in pixels."
+        },
+        "mrt.dialogue.languageFolderName": {
+            "type": "string",
+            "default": "texts",
+            "description": "Name of the folder containing .lang files, relative to workspace root or dialogue file."
+        },
+        "mrt.dialogue.defaultLanguage": {
+            "type": "string",
+            "default": "en_US",
+            "description": "Default language code (e.g., en_US) to look for in the language folder."
+        },
+        "mrt.linker.jsonKeysToScan": {
+            "type": "array",
+            "default": [
+                "identifier",
+                "textures",
+                "geometry",
+                "materials",
+                "render_controllers",
+                "animations",
+                "animation_controllers",
+                "scripts",
+                "parent"
+            ],
+            "description": "List of JSON keys whose string values should be treated as potential identifiers or links."
+        },
+        "mrt.linker.filesToIndex": {
+            "type": "string",
+            "default": "**/*.{json,mcfunction,lang}",
+            "description": "Glob pattern for files to include in the identifier index."
+        },
+        "mrt.linker.excludePattern": {
+            "type": "string",
+            "default": "**/node_modules/**,**/dist/**,**/out/**",
+            "description": "Glob pattern for files/folders to exclude from the identifier index."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.70.0",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^4.8.0"
+  }
+}
+
